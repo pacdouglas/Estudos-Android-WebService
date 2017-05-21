@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Created by alura on 12/08/15.
  */
-public class Aluno implements Serializable {
+public class Aluno implements Serializable
+{
     private Long id;
     private String nome;
     private String endereco;
@@ -14,64 +15,79 @@ public class Aluno implements Serializable {
     private Double nota;
     private String caminhoFoto;
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNome()
+    {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome)
+    {
         this.nome = nome;
     }
 
-    public String getEndereco() {
+    public String getEndereco()
+    {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(String endereco)
+    {
         this.endereco = endereco;
     }
 
-    public String getTelefone() {
+    public String getTelefone()
+    {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone)
+    {
         this.telefone = telefone;
     }
 
-    public String getSite() {
+    public String getSite()
+    {
         return site;
     }
 
-    public void setSite(String site) {
+    public void setSite(String site)
+    {
         this.site = site;
     }
 
-    public Double getNota() {
+    public Double getNota()
+    {
         return nota;
     }
 
-    public void setNota(Double nota) {
+    public void setNota(Double nota)
+    {
         this.nota = nota;
     }
 
-    public String getCaminhoFoto() {
+    public String getCaminhoFoto()
+    {
         return caminhoFoto;
     }
 
-    public void setCaminhoFoto(String caminhoFoto) {
+    public void setCaminhoFoto(String caminhoFoto)
+    {
         this.caminhoFoto = caminhoFoto;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return getId() + " - " + getNome();
     }
 }

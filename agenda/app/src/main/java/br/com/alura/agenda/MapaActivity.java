@@ -7,10 +7,12 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.SupportMapFragment;
 
-public class MapaActivity extends AppCompatActivity {
+public class MapaActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
 

@@ -13,9 +13,11 @@ import br.com.alura.agenda.dao.AlunoDAO;
 /**
  * Created by renan on 13/01/16.
  */
-public class SMSReceiver extends BroadcastReceiver {
+public class SMSReceiver extends BroadcastReceiver
+{
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent)
+    {
         Object[] pdus = (Object[]) intent.getSerializableExtra("pdus");
         byte[] pdu = (byte[]) pdus[0];
         String formato = (String) intent.getSerializableExtra("format");
@@ -24,7 +26,8 @@ public class SMSReceiver extends BroadcastReceiver {
 
         String telefone = sms.getDisplayOriginatingAddress();
         AlunoDAO dao = new AlunoDAO(context);
-        if (dao.ehAluno(telefone)) {
+        if (dao.ehAluno(telefone))
+        {
             Toast.makeText(context, "Chegou um SMS de Aluno!", Toast.LENGTH_SHORT).show();
             MediaPlayer mp = MediaPlayer.create(context, R.raw.msg);
             mp.start();

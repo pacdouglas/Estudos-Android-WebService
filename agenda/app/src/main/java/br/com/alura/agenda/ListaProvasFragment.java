@@ -22,11 +22,13 @@ import br.com.alura.agenda.modelo.Prova;
 /**
  * Created by alura on 03/06/16.
  */
-public class ListaProvasFragment extends Fragment {
+public class ListaProvasFragment extends Fragment
+{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_lista_provas, container, false);
 
         List<String> topicosPort = Arrays.asList("Sujeito", "Objeto direto", "Objeto indireto");
@@ -42,9 +44,11 @@ public class ListaProvasFragment extends Fragment {
         ListView lista = (ListView) view.findViewById(R.id.provas_lista);
         lista.setAdapter(adapter);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 Prova prova = (Prova) parent.getItemAtPosition(position);
                 Toast.makeText(getContext(), "Clicou na prova de " + prova, Toast.LENGTH_SHORT).show();
 

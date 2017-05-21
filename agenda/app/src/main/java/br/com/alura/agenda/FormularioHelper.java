@@ -11,7 +11,8 @@ import br.com.alura.agenda.modelo.Aluno;
 /**
  * Created by alura on 12/08/15.
  */
-public class FormularioHelper {
+public class FormularioHelper
+{
 
     private final EditText campoNome;
     private final EditText campoEndereco;
@@ -22,7 +23,8 @@ public class FormularioHelper {
 
     private Aluno aluno;
 
-    public FormularioHelper(FormularioActivity activity) {
+    public FormularioHelper(FormularioActivity activity)
+    {
         campoNome = (EditText) activity.findViewById(R.id.formulario_nome);
         campoEndereco = (EditText) activity.findViewById(R.id.formulario_endereco);
         campoTelefone = (EditText) activity.findViewById(R.id.formulario_telefone);
@@ -32,7 +34,8 @@ public class FormularioHelper {
         aluno = new Aluno();
     }
 
-    public Aluno pegaAluno() {
+    public Aluno pegaAluno()
+    {
         aluno.setNome(campoNome.getText().toString());
         aluno.setEndereco(campoEndereco.getText().toString());
         aluno.setTelefone(campoTelefone.getText().toString());
@@ -42,7 +45,8 @@ public class FormularioHelper {
         return aluno;
     }
 
-    public void preencheFormulario(Aluno aluno) {
+    public void preencheFormulario(Aluno aluno)
+    {
         campoNome.setText(aluno.getNome());
         campoEndereco.setText(aluno.getEndereco());
         campoTelefone.setText(aluno.getTelefone());
@@ -52,8 +56,10 @@ public class FormularioHelper {
         this.aluno = aluno;
     }
 
-    public void carregaImagem(String caminhoFoto) {
-        if (caminhoFoto != null) {
+    public void carregaImagem(String caminhoFoto)
+    {
+        if (caminhoFoto != null)
+        {
             Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
             Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
             campoFoto.setImageBitmap(bitmapReduzido);

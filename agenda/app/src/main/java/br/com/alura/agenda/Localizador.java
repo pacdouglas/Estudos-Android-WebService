@@ -17,12 +17,14 @@ import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by alura on 08/06/16.
  */
-public class Localizador implements GoogleApiClient.ConnectionCallbacks, LocationListener {
+public class Localizador implements GoogleApiClient.ConnectionCallbacks, LocationListener
+{
 
     private final GoogleApiClient client;
     private final GoogleMap mapa;
 
-    public Localizador(Context context, GoogleMap mapa) {
+    public Localizador(Context context, GoogleMap mapa)
+    {
         client = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -34,7 +36,8 @@ public class Localizador implements GoogleApiClient.ConnectionCallbacks, Locatio
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
+    public void onConnected(@Nullable Bundle bundle)
+    {
         LocationRequest request = new LocationRequest();
         request.setSmallestDisplacement(50);
         request.setInterval(1000);
@@ -44,12 +47,14 @@ public class Localizador implements GoogleApiClient.ConnectionCallbacks, Locatio
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
+    public void onConnectionSuspended(int i)
+    {
 
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(Location location)
+    {
         LatLng coordenada = new LatLng(location.getLatitude(), location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(coordenada);
         mapa.moveCamera(cameraUpdate);

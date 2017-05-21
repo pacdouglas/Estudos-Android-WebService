@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import br.com.alura.agenda.modelo.Prova;
 
-public class DetalhesProvaActivity extends AppCompatActivity {
+public class DetalhesProvaActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_prova);
 

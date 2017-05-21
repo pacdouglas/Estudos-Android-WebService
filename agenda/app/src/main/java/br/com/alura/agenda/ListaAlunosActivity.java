@@ -22,20 +22,24 @@ import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.modelo.Aluno;
 import br.com.alura.agenda.tasks.EnviaAlunosTask;
 
-public class ListaAlunosActivity extends AppCompatActivity {
+public class ListaAlunosActivity extends AppCompatActivity
+{
 
     private ListView listaAlunos;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
 
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
 
-        listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id)
+            {
                 Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(position);
 
                 Intent intentVaiProFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
@@ -45,9 +49,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
 
         Button novoAluno = (Button) findViewById(R.id.novo_aluno);
-        novoAluno.setOnClickListener(new View.OnClickListener() {
+        novoAluno.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intentVaiProFormulario = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
                 startActivity(intentVaiProFormulario);
             }
@@ -56,7 +62,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
         registerForContextMenu(listaAlunos);
     }
 
-    private void carregaLista() {
+    private void carregaLista()
+    {
         AlunoDAO dao = new AlunoDAO(this);
         List<Aluno> alunos = dao.buscaAlunos();
         dao.close();
@@ -66,21 +73,25 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         carregaLista();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
 
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case R.id.menu_enviar_notas:
                 new EnviaAlunosTask(this).execute();
                 break;
@@ -97,19 +108,24 @@ public class ListaAlunosActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo)
+    {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
 
         MenuItem itemLigar = menu.add("Ligar");
-        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
+        {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
+            public boolean onMenuItemClick(MenuItem item)
+            {
                 if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.CALL_PHONE)
-                        != PackageManager.PERMISSION_GRANTED) {
+                        != PackageManager.PERMISSION_GRANTED)
+                {
                     ActivityCompat.requestPermissions(ListaAlunosActivity.this,
                             new String[]{Manifest.permission.CALL_PHONE}, 123);
-                } else {
+                } else
+                {
                     Intent intentLigar = new Intent(Intent.ACTION_CALL);
                     intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
                     startActivity(intentLigar);
@@ -132,7 +148,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
 
         String site = aluno.getSite();
-        if (!site.startsWith("http://")) {
+        if (!site.startsWith("http://"))
+        {
             site = "http://" + site;
         }
 
@@ -140,9 +157,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
         itemSite.setIntent(intentSite);
 
         MenuItem deletar = menu.add("Deletar");
-        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
+        {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
+            public boolean onMenuItemClick(MenuItem item)
+            {
                 AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
                 dao.deleta(aluno);
                 dao.close();

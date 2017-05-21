@@ -19,38 +19,45 @@ import br.com.alura.agenda.modelo.Aluno;
 /**
  * Created by renan on 12/01/16.
  */
-public class AlunosAdapter extends BaseAdapter {
+public class AlunosAdapter extends BaseAdapter
+{
     private final List<Aluno> alunos;
     private final Context context;
 
-    public AlunosAdapter(Context context, List<Aluno> alunos) {
+    public AlunosAdapter(Context context, List<Aluno> alunos)
+    {
         this.context = context;
         this.alunos = alunos;
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return alunos.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position)
+    {
         return alunos.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return alunos.get(position).getId();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         Aluno aluno = alunos.get(position);
 
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = convertView;
-        if (view == null) {
+        if (view == null)
+        {
             view = inflater.inflate(R.layout.list_item, parent, false);
         }
 
@@ -61,18 +68,21 @@ public class AlunosAdapter extends BaseAdapter {
         campoTelefone.setText(aluno.getTelefone());
 
         TextView campoEndereco = (TextView) view.findViewById(R.id.item_endereco);
-        if (campoEndereco != null) {
+        if (campoEndereco != null)
+        {
             campoEndereco.setText(aluno.getEndereco());
         }
 
         TextView campoSite = (TextView) view.findViewById(R.id.item_site);
-        if (campoSite != null) {
+        if (campoSite != null)
+        {
             campoSite.setText(aluno.getSite());
         }
 
         ImageView campoFoto = (ImageView) view.findViewById(R.id.item_foto);
         String caminhoFoto = aluno.getCaminhoFoto();
-        if (caminhoFoto != null) {
+        if (caminhoFoto != null)
+        {
             Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
             Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
             campoFoto.setImageBitmap(bitmapReduzido);

@@ -15,13 +15,16 @@ import br.com.alura.agenda.modelo.Aluno;
 /**
  * Created by alura on 12/08/15.
  */
-public class AlunoDAO extends SQLiteOpenHelper {
-    public AlunoDAO(Context context) {
+public class AlunoDAO extends SQLiteOpenHelper
+{
+    public AlunoDAO(Context context)
+    {
         super(context, "Agenda", null, 2);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
         String sql = "CREATE TABLE Alunos (id INTEGER PRIMARY KEY, " +
                 "nome TEXT NOT NULL, " +
                 "endereco TEXT, " +
@@ -33,9 +36,11 @@ public class AlunoDAO extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
         String sql = "";
-        switch (oldVersion) {
+        switch (oldVersion)
+        {
             case 1:
                 sql = "ALTER TABLE Alunos ADD COLUMN caminhoFoto TEXT";
                 db.execSQL(sql); // indo para versao 2
@@ -43,7 +48,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     }
 
-    public void insere(Aluno aluno) {
+    public void insere(Aluno aluno)
+    {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues dados = pegaDadosDoAluno(aluno);
@@ -52,7 +58,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
     }
 
     @NonNull
-    private ContentValues pegaDadosDoAluno(Aluno aluno) {
+    private ContentValues pegaDadosDoAluno(Aluno aluno)
+    {
         ContentValues dados = new ContentValues();
         dados.put("nome", aluno.getNome());
         dados.put("endereco", aluno.getEndereco());
@@ -63,13 +70,15 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return dados;
     }
 
-    public List<Aluno> buscaAlunos() {
+    public List<Aluno> buscaAlunos()
+    {
         String sql = "SELECT * FROM Alunos;";
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(sql, null);
 
         List<Aluno> alunos = new ArrayList<Aluno>();
-        while (c.moveToNext()) {
+        while (c.moveToNext())
+        {
             Aluno aluno = new Aluno();
             aluno.setId(c.getLong(c.getColumnIndex("id")));
             aluno.setNome(c.getString(c.getColumnIndex("nome")));
@@ -86,14 +95,16 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return alunos;
     }
 
-    public void deleta(Aluno aluno) {
+    public void deleta(Aluno aluno)
+    {
         SQLiteDatabase db = getWritableDatabase();
 
         String[] params = {aluno.getId().toString()};
         db.delete("Alunos", "id = ?", params);
     }
 
-    public void altera(Aluno aluno) {
+    public void altera(Aluno aluno)
+    {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues dados = pegaDadosDoAluno(aluno);
@@ -102,7 +113,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
         db.update("Alunos", dados, "id = ?", params);
     }
 
-    public boolean ehAluno(String telefone) {
+    public boolean ehAluno(String telefone)
+    {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM Alunos WHERE telefone = ?", new String[]{telefone});
         int resultados = c.getCount();
