@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +67,12 @@ public class ListaAlunosActivity extends AppCompatActivity
     {
         AlunoDAO dao = new AlunoDAO(this);
         List<Aluno> alunos = dao.buscaAlunos();
+
+        for(Aluno aluno : alunos)
+        {
+            Log.i("Id do Aluno", aluno.getNome() + " :" + aluno.getId().toString());
+        }
+
         dao.close();
 
         AlunosAdapter adapter = new AlunosAdapter(this, alunos);
