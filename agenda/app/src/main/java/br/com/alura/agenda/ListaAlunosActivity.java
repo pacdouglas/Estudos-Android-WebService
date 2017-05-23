@@ -70,7 +70,7 @@ public class ListaAlunosActivity extends AppCompatActivity
 
         for(Aluno aluno : alunos)
         {
-            Log.i("Id do Aluno", aluno.getNome() + " :" + aluno.getId().toString());
+            Log.i("Id do Aluno", aluno.getNome() + ":" + aluno.getId().toString());
         }
 
         dao.close();

@@ -146,7 +146,7 @@ public class AlunoDAO extends SQLiteOpenHelper
         SQLiteDatabase db = getWritableDatabase();
 
         String[] params = {aluno.getId()};
-        db.delete("Alunos", "id = ?", params);
+        db.delete("Alunos", "id=?", params);
     }
 
     public void altera(Aluno aluno)
@@ -156,7 +156,7 @@ public class AlunoDAO extends SQLiteOpenHelper
         ContentValues dados = pegaDadosDoAluno(aluno);
 
         String[] params = {aluno.getId()};
-        db.update("Alunos", dados, "id = ?", params);
+        db.update("Alunos", dados, "id=?", params);
     }
 
     public boolean ehAluno(String telefone)

@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.List;
 
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.modelo.Aluno;
@@ -92,7 +91,7 @@ public class FormularioActivity extends AppCompatActivity
                 Aluno aluno = helper.pegaAluno();
 
                 AlunoDAO dao = new AlunoDAO(this);
-                if (existeAluno(dao, aluno))
+                if (aluno.getId() != null)
                 {
                     dao.altera(aluno);
                 } else
@@ -125,19 +124,5 @@ public class FormularioActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private boolean existeAluno(AlunoDAO dao, Aluno aluno)
-    {
-        List<Aluno> alunos = dao.buscaAlunos();
-
-        for(Aluno al : alunos)
-        {
-            if(al.equals(aluno))
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }
