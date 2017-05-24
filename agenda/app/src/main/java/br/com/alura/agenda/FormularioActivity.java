@@ -99,7 +99,7 @@ public class FormularioActivity extends AppCompatActivity
                     dao.insere(aluno);
                 }
                 dao.close();
-                
+
                 Call call = new RetrofitInicializador().getAlunoService().insere(aluno);
                 call.enqueue(new Callback()
                 {

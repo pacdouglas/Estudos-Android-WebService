@@ -1,5 +1,8 @@
 package br.com.alura.agenda.retrofit;
 
+import java.util.List;
+
+import br.com.alura.agenda.modelo.Aluno;
 import br.com.alura.agenda.services.AlunoService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
