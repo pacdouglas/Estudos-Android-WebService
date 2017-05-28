@@ -89,8 +89,9 @@ public class FormularioActivity extends AppCompatActivity
         {
             case R.id.menu_formulario_ok:
                 Aluno aluno = helper.pegaAluno();
-
                 AlunoDAO dao = new AlunoDAO(this);
+
+                aluno.desincroniza();
                 if (aluno.getId() != null)
                 {
                     dao.altera(aluno);

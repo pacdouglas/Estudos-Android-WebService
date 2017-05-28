@@ -81,11 +81,13 @@ public class ListaAlunosActivity extends AppCompatActivity
             public void onRefresh()
             {
                 sincronizador.buscaAlunos();
+                sincronizador.sincronizaAlunosInternos();
             }
         });
 
         registerForContextMenu(listaAlunos);
         sincronizador.buscaAlunos();
+        sincronizador.sincronizaAlunosInternos();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -106,6 +108,7 @@ public class ListaAlunosActivity extends AppCompatActivity
         for(Aluno aluno : alunos)
         {
             Log.i("Id do Aluno", aluno.getNome() + ":" + aluno.getId().toString());
+            Log.i("Aluno Sinc", String.valueOf(aluno.getSincronizado()));
         }
 
         dao.close();

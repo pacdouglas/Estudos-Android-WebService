@@ -20,7 +20,7 @@ public class AlunoDAO extends SQLiteOpenHelper
 {
     public AlunoDAO(Context context)
     {
-        super(context, "Agenda", null, 4);
+        super(context, "Agenda", null, 5);
     }
 
     @Override
@@ -33,7 +33,9 @@ public class AlunoDAO extends SQLiteOpenHelper
                 "telefone TEXT, " +
                 "site TEXT, " +
                 "nota REAL, " +
-                "caminhoFoto TEXT);";
+                "caminhoFoto TEXT," +
+                "sincronizado INT DEFAULT 0);";
+
         db.execSQL(sql);
     }
 
@@ -78,6 +80,11 @@ public class AlunoDAO extends SQLiteOpenHelper
                 {
                     db.execSQL(atualizaIdDoAluno, new String[]{geraUUID(), aluno.getId()});
                 }
+            case 4:
+                sql = "ALTER TABLE Alunos ADD COLUMN sincronizado INT"
+                        + "DEFAULT 0";
+                db.execSQL(sql);
+
         }
 
     }
@@ -109,6 +116,7 @@ public class AlunoDAO extends SQLiteOpenHelper
         dados.put("site", aluno.getSite());
         dados.put("nota", aluno.getNota());
         dados.put("caminhoFoto", aluno.getCaminhoFoto());
+        dados.put("sincronizado", aluno.getSincronizado());
         return dados;
     }
 
@@ -138,6 +146,7 @@ public class AlunoDAO extends SQLiteOpenHelper
             aluno.setSite(c.getString(c.getColumnIndex("site")));
             aluno.setNota(c.getDouble(c.getColumnIndex("nota")));
             aluno.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
+            aluno.setSincronizado(c.getInt(c.getColumnIndex("sincronizado")));
 
             alunos.add(aluno);
         }
@@ -155,7 +164,6 @@ public class AlunoDAO extends SQLiteOpenHelper
     public void altera(Aluno aluno)
     {
         SQLiteDatabase db = getWritableDatabase();
-
         ContentValues dados = pegaDadosDoAluno(aluno);
 
         String[] params = {aluno.getId()};
@@ -175,6 +183,7 @@ public class AlunoDAO extends SQLiteOpenHelper
     {
         for(Aluno aluno: alunos)
         {
+            aluno.sincroniza();
             if(existe(aluno))
             {
                 if(aluno.estaDesativado())
@@ -200,5 +209,14 @@ public class AlunoDAO extends SQLiteOpenHelper
         Cursor cursor = db.rawQuery(query, new String[]{aluno.getId()});
 
         return cursor.getCount() > 0;
+    }
+
+    public List<Aluno> listaNaoSincronizados()
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        String sql = "SELECT * Alunos WHERE sincronizado=0";
+
+        Cursor cursor = db.rawQuery(sql, null);
+        return populaAlunos(cursor);
     }
 }
