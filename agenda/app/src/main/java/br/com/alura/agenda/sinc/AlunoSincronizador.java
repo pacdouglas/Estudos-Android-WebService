@@ -7,7 +7,6 @@ import android.util.Log;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
-
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.dto.AlunoSync;
 import br.com.alura.agenda.event.AtualizaListaAlunoEvent;
@@ -111,6 +110,26 @@ public class AlunoSincronizador
                 dao.close();
             }
         });
+    }
 
+    public void deleta(final Aluno aluno)
+    {
+        new RetrofitInicializador().getAlunoService().deleta(aluno.getId())
+                .enqueue(new Callback<Void>()
+        {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response)
+            {
+                AlunoDAO alunoDAO = new AlunoDAO(context);
+                alunoDAO.deleta(aluno);
+                alunoDAO.close();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t)
+            {
+
+            }
+        });
     }
 }

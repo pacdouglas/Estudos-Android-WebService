@@ -125,4 +125,10 @@ public class Aluno implements Serializable
     {
         this.sincronizado = 0;
     }
+
+    public void desativa()
+    {
+        this.desativado = 1;
+        this.desincroniza();
+    }
 }
