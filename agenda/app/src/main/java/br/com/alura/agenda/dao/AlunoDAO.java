@@ -33,8 +33,8 @@ public class AlunoDAO extends SQLiteOpenHelper
                 "telefone TEXT, " +
                 "site TEXT, " +
                 "nota REAL, " +
-                "caminhoFoto TEXT," +
-                "sincronizado INT DEFAULT 0," +
+                "caminhoFoto TEXT, " +
+                "sincronizado INT DEFAULT 0, " +
                 "desativado INT DEFAULT 0);";
 
         db.execSQL(sql);
@@ -82,11 +82,10 @@ public class AlunoDAO extends SQLiteOpenHelper
                     db.execSQL(atualizaIdDoAluno, new String[]{geraUUID(), aluno.getId()});
                 }
             case 4:
-                sql = "ALTER TABLE Alunos ADD COLUMN sincronizado INT"
-                        + "DEFAULT 0";
+                sql = "ALTER TABLE Alunos ADD COLUMN sincronizado INT DEFAULT 0";
                 db.execSQL(sql);
             case 5:
-                sql = "ALTAR TABLE Alunos ADD COLUMN desativado INT DEFAULT 0";
+                sql = "ALTER TABLE Alunos ADD COLUMN desativado INT DEFAULT 0";
                 db.execSQL(sql);
         }
 
@@ -225,7 +224,7 @@ public class AlunoDAO extends SQLiteOpenHelper
     public List<Aluno> listaNaoSincronizados()
     {
         SQLiteDatabase db = getReadableDatabase();
-        String sql = "SELECT * Alunos WHERE sincronizado=0";
+        String sql = "SELECT * FROM Alunos WHERE sincronizado = 0";
 
         Cursor cursor = db.rawQuery(sql, null);
         return populaAlunos(cursor);
